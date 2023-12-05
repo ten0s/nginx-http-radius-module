@@ -718,7 +718,7 @@ ngx_http_auth_radius_dict_init(const ngx_str_t* dict_dir,ngx_log_t* log)
 	ngx_snprintf(dict,sizeof(dict) - 1,"%V",dict_dir);
 	if(dict_init((char*)dict,"dictionary") == -1) {
 		ngx_log_error(NGX_LOG_ERR,log,0,
-              "ngx_http_auth_radius: failed to initial radius dictionry: %s",
+              "ngx_http_auth_radius: failed to initial radius dictionary: %s",
               fr_strerror());
 		rc = NGX_ERROR;
 	}
