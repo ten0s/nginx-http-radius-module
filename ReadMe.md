@@ -4,70 +4,82 @@
 @author qudreams
 
 # Note:
-    The nginx-http-radius module depends on
-    [libmyradclient](https://github.com/ten0s/libmyradclient),
-    so you must compile the library first;
-    libmyradclient.a must be in same directory with nginx-http-radius module,
-    because the nginx-http-radius module
-    set the environment variables CORE_INCS and CORE_LIBS in 'config' file depending this.
-    The module also just support the following authentication methods:
-        PAP,CHAP,MSCHAP,MSCHAPV2,EAPMD5
+
+The nginx-http-radius module depends on
+[libmyradclient](https://github.com/ten0s/libmyradclient),
+so you must compile the library first;
+libmyradclient.a must be in same directory with the `nginx-http-radius` module,
+because the `nginx-http-radius` module
+set the environment variables `CORE_INCS` and `CORE_LIBS` in `config` file depending this.
+The module supports the following authentication methods: PAP,CHAP,MSCHAP,MSCHAPV2,EAPMD5
+
 # Usage:
-    1. compile the libmyradclient firstly.
-    2. compile the module into nginx like this:
-        ./configure --add-module=src/nginx-http-radius-module
-        make
 
-        after compiling,install it by the following directive:
-            make install
+1. compile the `libmyradclient` first.
 
-        Nginx will be installed into the directory /usr/local/nginx acquiescently.
-    3. install nginx,and then modify the configuration file nginx.conf.
-        the configuration file may be like the following:
+2. compile the module into nginx like this:
 
-        http {
-            #set the directory of radius dictionary (optional, not needed).
-            #radius_dict_directory "/usr/local/nginx/raddb/";
+```
+$ ./configure --add-module=src/nginx-http-radius-module
+$ make
+```
 
-            #radius server configuration including
+3. install it by the following directive:
 
-            radius_server "radius_server1" {
-                #authentication timed-out
-                auth_timeout 5;
+```
+$ [sudo] make install
+```
 
-                #limit to resend the request
-                resend_limit 3;
+Nginx will be installed into the directory /usr/local/nginx acquiescently.
 
-                #radius authentication server url.
-                url "127.0.0.1:1812";
+4. install nginx,and then modify the configuration file `nginx.conf`.
+   the configuration file may be like the following:
 
-                #share secret
-                share_secret "secret";
-            }
+```
+http {
+    #set the directory of radius dictionary (optional, not needed).
+    #radius_dict_directory "/usr/local/nginx/raddb/";
 
-            server {
-                listen       80;
-                server_name  localhost;
+    #radius server configuration including
 
-                #charset koi8-r;
+    radius_server "radius_server1" {
+        #authentication timed-out
+        auth_timeout 5;
 
-                #access_log  logs/host.access.log  main;
+        #limit to resend the request
+        resend_limit 3;
 
-                location = /{
-                    root   html;
-                    index  index.html index.htm;
+        #radius authentication server url.
+        url "127.0.0.1:1812";
 
-                    #radius server configuration
+        #share secret
+        share_secret "secret";
+    }
 
-                    #the third paramter is authentication method,you can set the following value:
-                    # PAP CHAP MSCHAP MSCHAP2 EAPMD5
+    server {
+        listen       80;
+        server_name  localhost;
 
-                    auth_radius_server "radius_server1" "PAP";
+        #charset koi8-r;
 
-                    #authentication realm,you can set the following value:
-                    # Restricted "Close Content" off
+        #access_log  logs/host.access.log  main;
 
-                    auth_radius "Restricted";
-                }
-            }
+        location = /{
+            root   html;
+            index  index.html index.htm;
+
+            #radius server configuration
+
+            #the third paramter is authentication method,you can set the following value:
+            # PAP CHAP MSCHAP MSCHAP2 EAPMD5
+
+            auth_radius_server "radius_server1" "PAP";
+
+            #authentication realm,you can set the following value:
+            # Restricted "Close Content" off
+
+            auth_radius "Restricted";
         }
+    }
+}
+```
