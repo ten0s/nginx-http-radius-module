@@ -23,7 +23,7 @@
         the configuration file may be like the following:
 
         http {
-            #set the directory of radius dictionary.
+            #set the directory of radius dictionary (optional).
             radius_dict_directory "/usr/local/nginx/raddb/";
 
             #radius server configuration including
