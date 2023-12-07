@@ -234,7 +234,7 @@ ngx_http_auth_radius_block(ngx_conf_t* cf,
     if(rv == NGX_CONF_OK) {
         if(server->url.data == NULL) {
             ngx_conf_log_error(NGX_LOG_ERR,cf,0,
-                    "ngx_http_auth_radius: server url haven't been set.");
+                    "ngx_http_auth_radius: server url hasn't been set.");
             return NGX_CONF_ERROR;
         }
 
@@ -242,7 +242,7 @@ ngx_http_auth_radius_block(ngx_conf_t* cf,
         server->parsed_url.default_port = 1812;
         if(ngx_parse_url(cf->pool,&server->parsed_url) == NGX_ERROR) {
             ngx_conf_log_error(NGX_LOG_ERR,cf,0,
-                "ngx_http_auth_radius: illegal server ulr: %V",
+                "ngx_http_auth_radius: illegal server url: %V",
                 &server->url);
             return NGX_CONF_ERROR;
         }
