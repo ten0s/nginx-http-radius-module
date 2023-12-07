@@ -4,8 +4,11 @@
 @author qudreams
 
 # Note:
-    The nginx-http-radius module depend on libmyradclient,so you must compile the library firstly;
-    libmyradclient.a must be in same directory with nginx-http-radius module,because the nginx-http-radius module
+    The nginx-http-radius module depends on
+    [libmyradclient](https://github.com/ten0s/libmyradclient),
+    so you must compile the library first;
+    libmyradclient.a must be in same directory with nginx-http-radius module,
+    because the nginx-http-radius module
     set the environment variables CORE_INCS and CORE_LIBS in 'config' file depending this.
     The module also just support the following authentication methods:
         PAP,CHAP,MSCHAP,MSCHAPV2,EAPMD5
@@ -23,8 +26,8 @@
         the configuration file may be like the following:
 
         http {
-            #set the directory of radius dictionary (optional).
-            radius_dict_directory "/usr/local/nginx/raddb/";
+            #set the directory of radius dictionary (optional, not needed).
+            #radius_dict_directory "/usr/local/nginx/raddb/";
 
             #radius server configuration including
 
