@@ -715,6 +715,12 @@ ngx_http_auth_radius_dict_init(const ngx_str_t* dict_dir,ngx_log_t* log)
 	ngx_int_t rc = NGX_OK;
 	u_char dict[1024] = {0};
 
+
+	// "radius_dict_directory" config is optional
+	if (!ngx_strlen(dict_dir)) {
+		return rc;
+	}
+
 	ngx_snprintf(dict,sizeof(dict) - 1,"%V",dict_dir);
 	if(dict_init((char*)dict,"dictionary") == -1) {
 		ngx_log_error(NGX_LOG_ERR,log,0,
