@@ -65,12 +65,11 @@ $ make
 $ [sudo] make install
 ```
 
-Nginx will be installed into the directory /usr/local/nginx acquiescently.
+Nginx will be installed into the directory `/usr/local/nginx` acquiescently.
 
 ### Configuration:
 
-Install nginx, and then modify the configuration file `nginx.conf`.
-   the configuration file may be like the following:
+Install Nginx, and then modify the configuration file `nginx.conf`:
 
 ```
 # Load the dynamic module
@@ -79,16 +78,16 @@ Install nginx, and then modify the configuration file `nginx.conf`.
 http {
     # Radius server configuration
     radius_server "radius_server1" {
-        # Authentication timed-out
+        # Authentication timed-out.
         auth_timeout 5;
 
-        # Limit to resend the request
+        # Limit to resend the request.
         resend_limit 3;
 
-        # Radius authentication server url
+        # Radius authentication server url.
         url "127.0.0.1:1812";
 
-        # Share secret
+        # Share secret.
         share_secret "secret";
     }
 
@@ -104,17 +103,15 @@ http {
             root   html;
             index  index.html index.htm;
 
-            #radius server configuration
+            # Radius server configuration.
 
-            #the third paramter is authentication method,you can set the following value:
-            # PAP CHAP MSCHAP MSCHAP2 EAPMD5
-
+            # Authentication types:
+            # PAP | CHAP | MSCHAP | MSCHAP2 | EAPMD5
             auth_radius_server "radius_server1" "PAP";
 
-            #authentication realm,you can set the following value:
-            # Restricted "Close Content" off
-
-            auth_radius "Restricted";
+            # Authentication realm:
+            # Realm string | off
+            auth_radius "Radius Auth";
         }
     }
 }
