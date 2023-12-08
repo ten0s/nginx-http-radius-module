@@ -37,22 +37,18 @@ Nginx will be installed into the directory /usr/local/nginx acquiescently.
 
 ```
 http {
-    #set the directory of radius dictionary (optional, not needed).
-    #radius_dict_directory "/usr/local/nginx/raddb/";
-
-    #radius server configuration including
-
+    # Radius server configuration
     radius_server "radius_server1" {
-        #authentication timed-out
+        # Authentication timed-out
         auth_timeout 5;
 
-        #limit to resend the request
+        # Limit to resend the request
         resend_limit 3;
 
-        #radius authentication server url.
+        # Radius authentication server url
         url "127.0.0.1:1812";
 
-        #share secret
+        # Share secret
         share_secret "secret";
     }
 
