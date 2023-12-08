@@ -1,12 +1,10 @@
-# nginx-http-radius authentication module
-
-HTTP Authentication by Radius protocol.
+# Nginx HTTP Radius Authentication Module
 
 @author qudreams
 
 # Note:
 
-The `nginx-http-radius` module depends on [libmyradclient](https://github.com/ten0s/libmyradclient).<br>
+The `nginx-http-radius-module` module depends on [libmyradclient](https://github.com/ten0s/libmyradclient).<br>
 The module supports the following authentication methods: PAP,CHAP,MSCHAP,MSCHAPV2,EAPMD5
 
 # Usage:
