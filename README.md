@@ -51,7 +51,7 @@ $ make
 ### Compile the dynamic module:
 
 For dynamic modules to be loaded correctly the downloaded Nginx version and
-Nginx build options must match exactly:
+Nginx build options must match exactly the target Nginx installation:
 
 ```
 $ nginx -V 2>&1 | egrep  "^configure" | cut -d: -f2 > nginx_build_opts.txt
