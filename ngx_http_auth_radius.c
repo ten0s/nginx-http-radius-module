@@ -917,8 +917,10 @@ ngx_http_auth_radius_authenticate(ngx_http_request_t* r)
 
     if(rr->done) {
         //radius authentication has finished
-        if(rr->error_code != NGX_HTTP_AUTH_RADIUS_OK) {
-            rc = ngx_http_auth_radius_set_realm(r,&rlcf->realm);;
+        if(rr->error_code == NGX_HTTP_AUTH_RADIUS_TIMEDOUT) {
+            rc = NGX_HTTP_SERVICE_UNAVAILABLE;
+        } else if(rr->error_code != NGX_HTTP_AUTH_RADIUS_OK) {
+            rc = ngx_http_auth_radius_set_realm(r,&rlcf->realm);
         } else {
             rc = NGX_OK;
         }
